@@ -39,7 +39,19 @@ class Fishy(ImageSprite):
         self.angle = 0
     def update(self):
         self.rect.x = self.rect.x + self.speed.x
-        self.rect.y += math.sin(self.angle) * 5
+        self.rect.y += round(math.sin(self.angle) * 5)
         self.angle = self.angle + 0.1
         if self.rect.right < 0:
             self.rect.left = width
+
+font.init()
+class Text():
+    def __init__(self, words, pos, colour, font_size, font_file):
+        self.pos = pos
+        self.colour = colour
+        self.font = font.Font(font_file, font_size)
+        self.update_words(words)
+    def update_words(self, new_words):
+        self.image = self.font.render(new_words, True, self.colour)
+    def draw(self, surface):
+        surface.blit(self.image, self.pos)

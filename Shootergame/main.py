@@ -6,10 +6,12 @@ width = 800
 height = 600
 window = display.set_mode((width, height))
 clock = time.Clock()
+counter = Text(words="points : 0", pos=(10,500), colour="black", font_size=50, font_file="Pangolin-Regular.ttf")
 fat_cat = PlayerSprite ("images/fat cat 2.png", (width/2, 480), (100,100))
 fat_cat.rect.centerx = width/2
 test_Fishy = Fishy("images/Fish.png", (width, height/2), (50, 50), (-5, 0))
 bag_of_fish = sprite.Group()
+points = 0
 def new_fish():
     y = randint(0,300)
     x_speed = randint(-7, -2)
@@ -39,8 +41,13 @@ while not event.peek(QUIT):
     bag_of_fish.draw(window)
     fat_cat.update()
     fat_cat.draw(window)
+    counter.draw(window)
+    hits = sprite.groupcollide(bag_of_fish,bullets, True, True)
+    for hit in hits:
+        points += 1
     display.update()
     clock.tick(60)
+
 
 
 
