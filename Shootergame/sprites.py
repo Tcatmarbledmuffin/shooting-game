@@ -55,3 +55,9 @@ class Text():
         self.image = self.font.render(new_words, True, self.colour)
     def draw(self, surface):
         surface.blit(self.image, self.pos)
+
+class Bomb(ImageSprite):
+    def update(self):
+        self.rect.y = self.rect.y + 5
+        if self.rect.top > height:
+            self.kill()
