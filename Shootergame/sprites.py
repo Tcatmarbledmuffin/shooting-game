@@ -10,7 +10,7 @@ class ImageSprite(sprite.Sprite):
         self.rect = Rect(pos, size)
     def draw(self, surface):
         surface.blit(self.image, self.rect)
-        draw.rect(surface, "yellow", self.rect, 2)
+        #draw.rect(surface, "yellow", self.rect, 2)
 
 class PlayerSprite(ImageSprite):
     def update(self):
@@ -57,7 +57,11 @@ class Text():
         surface.blit(self.image, self.pos)
 
 class Bomb(ImageSprite):
+    
+    def __init__(self, file, pos, size, speed):
+        super() .__init__(file, pos, size)
+        self.speed = speed
     def update(self):
-        self.rect.y = self.rect.y + 5
+        self.rect.y = self.rect.y + self.speed
         if self.rect.top > height:
             self.kill()
